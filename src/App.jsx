@@ -7,8 +7,8 @@ import moonIcon from "./assets/images/icon-moon.svg"
 
 function App() {
   const [selectedFilter, setSelectedFilter] = useState('all');
-  const [isDarkMode, setIsDarkMode] = useState(false)
-  const [todos, setTodos] = useState([])
+  const [isDarkMode, setIsDarkMode] = useState(() => JSON.parse(localStorage.getItem('isDarkMode')) || false)
+  const [todos, setTodos] = useState(() => JSON.parse(localStorage.getItem('todolist')) || [])
   const [filteredTodos, setFilteredTodos] = useState([])
 
   function toggleTheme() {
@@ -17,6 +17,14 @@ function App() {
 
   useEffect(() => {
     document.body.classList.toggle('dark-mode', isDarkMode);
+  }, [isDarkMode]);
+
+  useEffect(() => {
+    localStorage.setItem("todolist",JSON.stringify(todos))
+  },[todos])
+
+    useEffect(() => {
+    localStorage.setItem('isDarkMode', JSON.stringify(isDarkMode));
   }, [isDarkMode]);
 
   function handleAddTodo(newTodo) {
@@ -66,10 +74,6 @@ function App() {
     })
     return count
   }
-
-  useEffect(() => {
-    console.log(todos)
-  },[todos])
 
   const itemsleft = itemLeft()
 
