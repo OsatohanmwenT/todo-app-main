@@ -59,17 +59,14 @@ function App() {
 
   function showAllItems() {
     setSelectedFilter("all")
-    setFilteredTodos(todos);
   }
 
   function showActiveItems() {
     setSelectedFilter("active")
-    setFilteredTodos(todos.filter(item => item.checked !== true));
   }
 
   function showCompletedItems() {
     setSelectedFilter("completed")
-    setFilteredTodos(todos.filter(item => item.checked === true));
   }
 
   function itemLeft() {
