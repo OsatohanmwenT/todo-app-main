@@ -21,7 +21,14 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("todolist",JSON.stringify(todos))
-  },[todos])
+     if (selectedFilter === 'all') {
+      setFilteredTodos(todos);
+    } else if (selectedFilter === 'active') {
+      setFilteredTodos(todos.filter(todo => !todo.checked));
+    } else if (selectedFilter === 'completed') {
+      setFilteredTodos(todos.filter(todo => todo.checked));
+    }
+  },[todos,selectedFilter])
 
     useEffect(() => {
     localStorage.setItem('isDarkMode', JSON.stringify(isDarkMode));
